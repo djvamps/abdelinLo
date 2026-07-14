@@ -1,4 +1,3 @@
-console.log("¡El archivo script.js se está ejecutando correctamente!");
 // ===== MENÚ HAMBURGUESA =====
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
