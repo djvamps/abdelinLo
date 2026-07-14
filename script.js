@@ -211,8 +211,13 @@ if (contactForm) {
     submitBtn.textContent = 'Enviando...';
     submitBtn.disabled = true;
 
+    // 1. Primero asignas el correo al input '_replyto'
+    contactForm.querySelector('input[name="_replyto"]').value = contactForm.querySelector('input[name="email"]').value;
+
+    // 2. Después creas el FormData con todos los campos ya actualizados
     const formData = new FormData(contactForm);
 
+    // 3. Y finalmente envías el formulario
     try {
       const response = await fetch('https://formsubmit.co/ajax/890665adf3e8427c1cdca4efe697c540', {
         method: 'POST',
