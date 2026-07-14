@@ -221,7 +221,7 @@ if (contactForm) {
       });
 
       if (response.ok) {
-        mostrarMensaje('success', '¡Mensaje enviado! Te contactaré pronto 🙌');
+        mostrarMensaje('success', '¡Mensaje enviado!, Te contactaré pronto 🙌');
         contactForm.reset();
       } else {
         throw new Error('Error en el envío');
