@@ -783,3 +783,35 @@ section {
     from { opacity: 0; transform: translateY(-6px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  /* Contenedor del input + icono */
+.input-group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px; /* Espacio de separación entre cada campo */
+}
+
+/* Forzar que los inputs dentro de un grupo ocupen el 100% */
+.input-group input {
+    width: 100%;
+    padding-left: 48px !important; /* Espacio extra a la izquierda para que el texto no pise el icono */
+}
+
+/* Posicionamiento del icono */
+.input-group .input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    fill: #9ca3af; /* Color gris suave para el icono */
+    pointer-events: none; /* Permite hacer clic a través del icono para enfocar el input */
+    transition: fill 0.3s ease;
+}
+.input-group textarea {
+    width: 100%;
+    padding: 15px !important; /* Para que el texto dentro del mensaje no se pegue a los bordes */
+}
+
+/* Efecto: cambia el color del icono cuando el usuario hace clic en el input */
+.input-group:focus-within .input-icon {
+    fill: #3b82f6; /* Color azul al enfocar (puedes cambiarlo por el naranja o morado de tu marca) */
+}
