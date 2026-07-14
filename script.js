@@ -1,3 +1,4 @@
+console.log("¡El archivo script.js se está ejecutando correctamente!");
 // ===== MENÚ HAMBURGUESA =====
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -75,37 +76,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
-
-// ===== FORMULARIO DE CONTACTO =====
-const contactForm = document.getElementById('contactForm');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Obtener valores del formulario
-        const name = contactForm.querySelector('input[type="text"]').value;
-        const email = contactForm.querySelector('input[type="email"]').value;
-        const message = contactForm.querySelector('textarea').value;
-        
-        // Validar que los campos no estén vacíos
-        if (name.trim() && email.trim() && message.trim()) {
-            // Crear mailto link
-            const mailtoLink = `mailto:tu@email.com?subject=Mensaje de ${name}&body=${encodeURIComponent(message)}%0A%0ADe: ${name}%0AEmail: ${email}`;
-            
-            // Abrir cliente de correo
-            window.location.href = mailtoLink;
-            
-            // Limpiar formulario
-            contactForm.reset();
-            
-            // Mostrar mensaje de éxito
-            showNotification('¡Mensaje enviado! Te contactaremos pronto.');
-        } else {
-            showNotification('Por favor, completa todos los campos.', 'error');
-        }
-    });
-}
 
 // ===== NOTIFICACIÓN =====
 function showNotification(message, type = 'success') {
@@ -229,4 +199,56 @@ document.addEventListener('DOMContentLoaded', () => {
         firstNavLink.style.color = 'var(--primary-color)';
     }
 });
+
+// Manejo del formulario de contacto con FormSubmit (AJAX, sin redirección)
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.textContent;
+    submitBtn.textContent = 'Enviando...';
+    submitBtn.disabled = true;
+
+    const formData = new FormData(contactForm);
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/890665adf3e8427c1cdca4efe697c540', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      });
+
+      if (response.ok) {
+        mostrarMensaje('success', '¡Mensaje enviado! Te contactaré pronto 🙌');
+        contactForm.reset();
+      } else {
+        throw new Error('Error en el envío');
+      }
+    } catch (error) {
+      mostrarMensaje('error', 'Hubo un problema al enviar tu mensaje. Intenta de nuevo o escríbeme directamente por email.');
+    } finally {
+      submitBtn.textContent = originalBtnText;
+      submitBtn.disabled = false;
+    }
+  });
+}
+
+function mostrarMensaje(tipo, texto) {
+  let msgBox = document.getElementById('form-message');
+  if (!msgBox) {
+    msgBox = document.createElement('div');
+    msgBox.id = 'form-message';
+    contactForm.insertAdjacentElement('afterend', msgBox);
+  }
+  msgBox.textContent = texto;
+  msgBox.className = `form-message ${tipo}`;
+
+  setTimeout(() => {
+    msgBox.remove();
+  }, 6000);
+}
+
 

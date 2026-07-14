@@ -757,3 +757,29 @@ section {
         font-size: 1.2rem;
     }
 }
+
+/* ===== FORM MESSAGE ===== */
+.form-message {
+    margin-top: 1rem;
+    padding: 0.9rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .form-message.success {
+    background-color: rgba(34, 197, 94, 0.15);
+    color: #16a34a;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+  }
+  
+  .form-message.error {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: #dc2626;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
