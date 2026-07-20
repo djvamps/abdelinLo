@@ -118,7 +118,7 @@ html {
 .hero {
     margin-top: 80px;
     min-height: calc(100vh - 80px);
-    background: #03050d;
+    background: linear-gradient(135deg, #031d3b 0%, #467ad4 50%, #051029 100%);
     display: flex;
     align-items: center;
     justify-content: center;
